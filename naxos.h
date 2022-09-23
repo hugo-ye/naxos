@@ -244,14 +244,14 @@ class  NsDeque : public std::deque<TemplType>  {
 		typename std::deque<TemplType>::reference
 		operator  [] (const typename std::deque<TemplType>::size_type i)
 		{
-			return  at(i);
+			return  this -> at(i);
 		}
 
 
 		typename std::deque<TemplType>::const_reference
 		operator  [] (const typename std::deque<TemplType>::size_type i)  const
 		{
-			return  at(i);
+			return this -> at(i);
 		}
 
 
@@ -1864,26 +1864,24 @@ class  NsIntVar  {
 		///  \name  Auxiliary AC algorithm data-members
 
 
-	private:
+    struct  ConstraintAndFailure  {
 
-		///  Pair of a constraint and the inconsistencies that has provoked.
+        ///  The constraint.
+        Ns_Constraint  *constr;
 
-		struct  ConstraintAndFailure  {
+        ///  The inconsistencies that constr provoked.
+        unsigned long   failures;
 
-			///  The constraint.
-			Ns_Constraint  *constr;
+        ///  Constructor.
+        ConstraintAndFailure (Ns_Constraint *constr_init)
+            : constr(constr_init), failures(0)
+        {	}
+    };
 
-			///  The inconsistencies that constr provoked.
-			unsigned long   failures;
-
-			///  Constructor.
-			ConstraintAndFailure (Ns_Constraint *constr_init)
-				: constr(constr_init), failures(0)
-			{	}
-		};
+    ///  Pair of a constraint and the inconsistencies that has provoked.
 
 
-	public:
+public:
 
 
 		///  An array of the constraints that the variable is involved in.
@@ -2713,7 +2711,7 @@ class  Ns_Constraint  {
 			virtual void
 		toGraphFile (std::ofstream& fileConstraintsGraph)  const
 		{
-			assert_Ns( fileConstraintsGraph ,  "Ns_Constraint::toGraphFile: Problem writing to file");
+			assert_Ns( fileConstraintsGraph.good() ,  "Ns_Constraint::toGraphFile: Problem writing to file");
 
 			fileConstraintsGraph << "\n\t"
 			<< "//  Unimplemented constraint representation\n";

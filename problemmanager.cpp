@@ -73,7 +73,7 @@ Ns_StackSearch::searchToGraphFile (const char *fileName)
 	fileSearchGraph.open(fileName);
 
 
-	assert_Ns( fileSearchGraph ,
+	assert_Ns( fileSearchGraph.good() ,
 		"Ns_StackSearch::searchToGraphFile: Could not open file");
 
 
@@ -209,7 +209,7 @@ NsProblemManager::constraintsToGraphFile (const char *fileName)
 	fileConstraintsGraph.open(fileName);
 
 
-	assert_Ns( fileConstraintsGraph ,
+	assert_Ns( fileConstraintsGraph.good() ,
 	"NsProblemManager::constraintsToGraphFile: Could not open file");
 
 
