@@ -398,14 +398,14 @@ class  NsList : public std::list<TemplType>  {
 
 		NsList (TemplType item)
 		{
-			push_back(item);
+			this -> push_back(item);
 		}
 
 
 		NsList (TemplType item1, TemplType item2)
 		{
-			push_back(item1);
-			push_back(item2);
+			this -> push_back(item1);
+			this -> push_back(item2);
 		}
 
 
